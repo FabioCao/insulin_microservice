@@ -1,0 +1,23 @@
+services:
+  server:
+    container_name: insulin-microservice
+    build: '.'
+    depends_on:
+      - db
+    links:
+      - db
+    ports:
+      - '5051:5000'
+    networks:
+      - host
+
+  db:
+    image: 'mongo'
+    container_name: mongo2
+    ports:
+      - '27018:27017'
+    networks:
+      - host 
+networks: 
+  host:
+    driver: NETINSUL

@@ -1,0 +1,148 @@
+swagger: "2.0"
+info:
+  description: Swagger file
+  version: "1.0.0"
+  title: Swagger ReST Insulinas
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+paths:
+  /insulinas:
+    get:
+      operationId: insulinas.read_all
+      tags:
+        - Insulinas
+      summary: Lista de Insulinas
+      description: Lista de Insulinas
+      responses:
+        200:
+          description: Sucesso na leitura de Insulinas
+          schema:
+            type: array
+            items:
+              properties:
+                insulina:
+                  type: string
+                tipo:
+                  type: string
+                acao:
+                  type: string
+                pico:
+                  type: string
+                duracao:
+                  type: string
+                timestamp:
+                  type: string
+    post:
+      operationId: insulinas.create
+      tags:
+        - Insulinas
+      summary: Cria uma Insulina e adiciona na lista de Insulinas
+      description: Adiciona Insulina na lista de Insulinas
+      parameters:
+        - name: insulin
+          in: body
+          description: Insulina a ser criada
+          required: True
+          schema:
+            type: object
+            properties:
+              insulina:
+                type: string
+                description: Insulina
+              tipo:
+                type: string
+                description: Tipo
+              acao:
+                type: string
+                description: Início de Ação
+              pico:
+                type: string
+                description: Pico de Ação
+              duracao:
+                type: string
+                description: Duração de ação
+      responses:
+        201:
+          description: Sucesso ao criar
+
+  /insulinas/{insulina}:
+    get:
+      operationId: insulinas.read_one
+      tags:
+        - Insulinas
+      summary: Leitura de uma insulina da lista de Insulinas
+      description: Leitura de uma insulina
+      parameters:
+        - name: insulina
+          in: path
+          description: Insulina
+          type: string
+          required: True
+      responses:
+        200:
+          description: Sucesso na leitura de uma insulina
+          schema:
+            properties:
+              insulina:
+                type: string
+              tipo:
+                type: string
+              acao:
+                type: string
+              pico:
+                type: string
+              duracao:
+                type: string
+              timestamp:
+                type: string
+    put:
+      operationId: insulinas.update
+      tags:
+        - Insulinas
+      summary: Update insulina na lista de Insulinas
+      description: Update na lista
+      parameters:
+        - name: insulina
+          in: path
+          description: Insulina
+          type: string
+          required: True
+        - name: insulin
+          in: body
+          schema:
+            type: object
+            properties:
+              insulina:
+                type: string
+              tipo:
+                type: string
+              acao:
+                type: string
+              pico:
+                type: string
+              duracao:
+                type: string
+      responses:
+        200:
+          description: Sucesso ao atualizar
+
+    delete:
+      operationId: insulinas.delete
+      tags:
+        - Insulinas
+      summary: Deletar uma insulina na lista de Insulinas
+      description: Deleta uma insulina
+      parameters:
+        - name: insulina
+          in: path
+          type: string
+          required: True
+      responses:
+        200:
+          description: Sucesso ao deletar
+
